@@ -19,6 +19,7 @@ var ProductComponent = /** @class */ (function () {
     function ProductComponent(_product, pagerService) {
         this._product = _product;
         this.pagerService = pagerService;
+        this.newProduct = { ID: 27, Name: 'AB', Description: 'AB' };
         // pager object
         this.pager = {};
     }
@@ -41,19 +42,26 @@ var ProductComponent = /** @class */ (function () {
         // get current page of items
         this.pagedItems = this.products.slice(this.pager.startIndex, this.pager.endIndex + 1);
     };
-    // function to be called when user clicks on EDIT
+    // function to be called when user clicks on TABLE ROW
     ProductComponent.prototype.ShowDetails = function (showProduct) {
         this.selectedProduct = showProduct;
+        this.formMode = true;
+    };
+    // function to be called when user clicks on Create New button
+    ProductComponent.prototype.createNewProduct = function () {
+        this.selectedProduct = this.newProduct;
+        this.formMode = false;
     };
     // function to be called when user clicks on EDIT
-    ProductComponent.prototype.editProduct = function (selectedProductId) {
-        alert('Hello, You have selected ' + selectedProductId);
+    ProductComponent.prototype.editProduct = function (selectedProduct) {
+        this.selectedProduct = selectedProduct;
+        this.formMode = false;
     };
     // function to be called when user clicks on DELETE
     ProductComponent.prototype.removeProduct = function (selectedProductId) {
-        alert('Hello, Are you sure to Delete ' + selectedProductId);
+        this.selectedProduct = null;
+        alert('Are you sure to Delete ' + selectedProductId);
     };
-    ;
     ProductComponent = __decorate([
         core_1.Component({
             selector: 'Products',

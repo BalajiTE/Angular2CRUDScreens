@@ -15,10 +15,24 @@ var ProductDetailsComponent = /** @class */ (function () {
     function ProductDetailsComponent() {
     }
     ProductDetailsComponent.prototype.ngOnInit = function () { };
+    ProductDetailsComponent.prototype.CloseProductDetailsView = function () {
+        this.product = null;
+    };
+    ProductDetailsComponent.prototype.resetProduct = function (productForm) {
+        productForm.form.reset();
+    };
+    ProductDetailsComponent.prototype.saveProductDetails = function () {
+        alert('Saved Changes Successfully ! ! !');
+        this.product = null;
+    };
     __decorate([
         core_1.Input(),
         __metadata("design:type", Object)
     ], ProductDetailsComponent.prototype, "product", void 0);
+    __decorate([
+        core_1.Input(),
+        __metadata("design:type", Boolean)
+    ], ProductDetailsComponent.prototype, "isReadOnly", void 0);
     ProductDetailsComponent = __decorate([
         core_1.Component({
             selector: 'ProductDetails',

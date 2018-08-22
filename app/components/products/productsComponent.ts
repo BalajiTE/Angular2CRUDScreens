@@ -18,8 +18,10 @@ import 'rxjs/add/operator/map';
 
 export class ProductComponent implements OnInit {
     iproducts: Observable<Product[]>;
-    products: Product[];    
+    products: Product[];        
     selectedProduct: Product;
+    formMode:boolean;
+    newProduct: Product = { ID: 27, Name: 'AB', Description: 'AB'};
 
     // pager object
     pager: any = {};
@@ -53,18 +55,27 @@ export class ProductComponent implements OnInit {
         this.pagedItems = this.products.slice(this.pager.startIndex, this.pager.endIndex + 1);
     }
 
-        // function to be called when user clicks on EDIT
-    ShowDetails(showProduct: Product) : void{
+     // function to be called when user clicks on TABLE ROW
+     ShowDetails(showProduct: Product) : void{
         this.selectedProduct = showProduct;
-    }
+        this.formMode = true;
+     }
+
+     // function to be called when user clicks on Create New button
+     createNewProduct() : void {
+        this.selectedProduct = this.newProduct;
+        this.formMode = false;
+     }     
 
      // function to be called when user clicks on EDIT
-     editProduct(selectedProductId: number) : void{
-         alert('Hello, You have selected ' + selectedProductId );
+     editProduct(selectedProduct: Product) : void{
+        this.selectedProduct = selectedProduct;
+        this.formMode = false;         
      }
 
      // function to be called when user clicks on DELETE
      removeProduct(selectedProductId: number) : void{
-        alert('Hello, Are you sure to Delete ' + selectedProductId )
-    };
+         this.selectedProduct = null;
+        alert('Are you sure to Delete ' + selectedProductId )
+     }
     }
